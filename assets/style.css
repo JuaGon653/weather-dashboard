@@ -3,6 +3,9 @@
     padding: 0;
     font-family: 'Fjalla One', sans-serif;
 }
+html {
+    background-color: darkgrey;
+}
 
 header {
     background-color: skyblue;
@@ -103,4 +106,23 @@ hr {
 #five-icon {
     width: 60px;
     height: 60px;
+}
+
+@media screen and (max-width: 700px) {
+    .custom-col {
+        height: fit-content;
+    }
+    .custom-row {
+        display: flex;
+        flex-direction: column;
+    }
+    #current-weather-box {
+        height: 50vh;
+    }
+    #day-list {
+        flex-direction: column;
+    }
+    #a-future-day {
+        width: 250px;
+    }
 }

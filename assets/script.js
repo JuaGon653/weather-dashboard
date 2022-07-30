@@ -31,6 +31,10 @@ searchBtnEl.on('click', function(event) {
     addToHistory(cityInput.val().trim());
     cityInput.val('');
 })
+historyItemEl.on('click', function(event) {
+        event.preventDefault();
+        getWeather(this.id);
+})
 
 function addToHistory(name) {
     var liEl = $('<li class="history-item" id="' + linkName + '"></li>');
@@ -45,12 +49,6 @@ function addToHistory(name) {
         historyArray.push(linkName);
         localStorage.setItem('history', JSON.stringify(historyArray));
     }
-    
-
-    historyItemEl.on('click', function(event) {
-        event.preventDefault();
-        getWeather(this.id);
-    })
 }
 
 
@@ -116,6 +114,7 @@ function getWeather(inputCityName) {
             liEl.append('<h3>Humidity: ' + data.daily[i].humidity + '%</h3>')
             dayListEl.append(liEl);
         }
+        $('.custom-col').css('height', 'fit-content');
     }
 }
 
