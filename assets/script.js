@@ -21,7 +21,7 @@ String.prototype.replaceAt = function(index, replacement) {
 }
 
 function getWeather() {
-    var inputCityName = cityInput.val();
+    var inputCityName = cityInput.eq(0).val();
     
     for(var i = 0; i < inputCityName.length; i++){
         if(inputCityName.charAt(i) == ' '){
@@ -30,13 +30,24 @@ function getWeather() {
         }
     }
 
-    fetch('http://api.openweathermap.org/geo/1.0/direct?q=' + inputCityName + ',US&limit=5&appid=be494bca977f23d851a98891f453fb89')
+    // fetchs the input city's latitude and longitude from the openweather geocoding API and plugs it into the openweather one call API that uses the 
+    // longitude and latitude to find the weather of the given area
+    fetch('http://api.openweathermap.org/geo/1.0/direct?q=' + inputCityName + ',USA&limit=1&appid=be494bca977f23d851a98891f453fb89')
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
             longitude = data[0].lon;
             latitude = data[0].lat;
-        })
+            fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + latitude + '&lon=' + longitude + '&units=imperial&appid=be494bca977f23d851a98891f453fb89')
+                .then(function (response) {
+                    return response.json();
+                })
+                .then (function (data) {
+                    console.log(data);
+                });
+        });
+
+    
 }
 
