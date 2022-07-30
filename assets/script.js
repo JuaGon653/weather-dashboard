@@ -13,29 +13,6 @@ var historyItemEl;
 var historyArray = [];
 var linkName;
 
-if(JSON.parse(localStorage.getItem('history')) != null){
-    historyArray = JSON.parse(localStorage.getItem('history'));
-    for(var i = 0; i < historyArray.length; i = i + 2){
-        var liEl = $('<li class="history-item" id="' + historyArray[i+1] + '"></li>');
-        liEl.html(historyArray[i]);
-        historyListEl.append(liEl);
-        historyItemEl = $('.history-item');
-    }
-}
-
-
-
-searchBtnEl.on('click', function(event) {
-    event.preventDefault();
-    getWeather(cityInput.eq(0).val().trim());
-    addToHistory(cityInput.val().trim());
-    cityInput.val('');
-})
-historyItemEl.on('click', function(event) {
-        event.preventDefault();
-        getWeather(this.id);
-})
-
 function addToHistory(name) {
     var liEl = $('<li class="history-item" id="' + linkName + '"></li>');
     liEl.html(name);
@@ -117,6 +94,33 @@ function getWeather(inputCityName) {
         $('.custom-col').css('height', 'fit-content');
     }
 }
+
+if(JSON.parse(localStorage.getItem('history')) != null){
+    historyArray = JSON.parse(localStorage.getItem('history'));
+    for(var i = 0; i < historyArray.length; i = i + 2){
+        var liEl = $('<li class="history-item" id="' + historyArray[i+1] + '"></li>');
+        liEl.html(historyArray[i]);
+        historyListEl.append(liEl);
+        historyItemEl = $('.history-item');
+    }
+}
+
+
+
+searchBtnEl.on('click', function(event) {
+    event.preventDefault();
+    if(cityInput.val().trim() == ''){
+        return;
+    }
+    getWeather(cityInput.eq(0).val().trim());
+    addToHistory(cityInput.val().trim());
+    cityInput.val('');
+})
+historyItemEl.on('click', function(event) {
+        event.preventDefault();
+        getWeather(this.id);
+})
+
 
 
 
