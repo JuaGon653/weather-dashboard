@@ -26,6 +26,10 @@ function addToHistory(name) {
         historyArray.push(linkName);
         localStorage.setItem('history', JSON.stringify(historyArray));
     }
+    historyItemEl.on('click', function(event) {
+        event.preventDefault();
+        getWeather(this.id);
+    })
 }
 
 
@@ -116,11 +120,6 @@ searchBtnEl.on('click', function(event) {
     addToHistory(cityInput.val().trim());
     cityInput.val('');
 })
-historyItemEl.on('click', function(event) {
-        event.preventDefault();
-        getWeather(this.id);
-})
-
 
 
 
