@@ -33,16 +33,6 @@ function addToHistory(name) {
         getWeather(this.id);
     });
 }
-
-function init() {
-    if($('.history-item') !== undefined){
-        $('.history-item').on('click', function(event){
-            event.preventDefault();
-            getWeather(this.id);
-        });
-    }
-}
-init();
     
 String.prototype.replaceAt = function(index, replacement) {
         return this.substring(0, index) + replacement + this.substring(index + replacement.length);
@@ -113,6 +103,10 @@ if(JSON.parse(localStorage.getItem('history')) != null){
         historyListEl.append(liEl);
         historyItemEl = $('.history-item');
     }
+    historyItemEl.on('click', function(event){
+        event.preventDefault();
+        getWeather(this.id);
+    });
 }
 
 
