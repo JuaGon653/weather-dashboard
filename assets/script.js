@@ -49,7 +49,7 @@ function getWeather(inputCityName) {
 
     // fetchs the input city's latitude and longitude from the openweather geocoding API and plugs it into the openweather one call API that uses the 
     // longitude and latitude to find the weather of the given area
-    fetch('http://api.openweathermap.org/geo/1.0/direct?q=' + linkName + ',USA&limit=1&appid=be494bca977f23d851a98891f453fb89')
+    fetch('https://api.openweathermap.org/geo/1.0/direct?q=' + linkName + ',USA&limit=1&appid=be494bca977f23d851a98891f453fb89')
         .then(function (response) {
             return response.json();
         })
