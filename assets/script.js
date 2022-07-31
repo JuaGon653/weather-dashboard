@@ -65,6 +65,7 @@ function getWeather(inputCityName) {
                 });
         });    
 }
+
 function showWeather(data, inputCityName) {
     cardTitleEl.html(inputCityName);
     cardDateEl.html(moment().format('M/D/YYYY'));
@@ -81,6 +82,7 @@ function showWeather(data, inputCityName) {
         cardUVIndexEl.css('background-color', 'green');
     }
 }
+
 function showFutureWeather(data) {
     dayListEl.html('');
     for(var i = 1; i < 6; i++){
@@ -95,20 +97,23 @@ function showFutureWeather(data) {
     }
     $('.custom-col').css('height', 'fit-content');
 }
-if(JSON.parse(localStorage.getItem('history')) != null){
-    historyArray = JSON.parse(localStorage.getItem('history'));
-    for(var i = 0; i < historyArray.length; i = i + 2){
-        var liEl = $('<li class="history-item" id="' + historyArray[i+1] + '"></li>');
-        liEl.html(historyArray[i]);
-        historyListEl.append(liEl);
-        historyItemEl = $('.history-item');
-    }
-    historyItemEl.on('click', function(event){
-        event.preventDefault();
-        getWeather(this.id);
-    });
-}
 
+function init() {
+    if(JSON.parse(localStorage.getItem('history')) != null){
+        historyArray = JSON.parse(localStorage.getItem('history'));
+        for(var i = 0; i < historyArray.length; i = i + 2){
+            var liEl = $('<li class="history-item" id="' + historyArray[i+1] + '"></li>');
+            liEl.html(historyArray[i]);
+            historyListEl.append(liEl);
+            historyItemEl = $('.history-item');
+        }
+        historyItemEl.on('click', function(event){
+            event.preventDefault();
+            getWeather(this.id);
+        });
+    }
+}
+init();
 
 
 searchBtnEl.on('click', function(event) {
